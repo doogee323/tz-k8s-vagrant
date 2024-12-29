@@ -14,8 +14,10 @@ spec:
       paths:
       - path: /
         backend:
-          serviceName: vault
-          servicePort: 8200
+          service:
+            name: vault
+            port:
+              number: 8200
   - host: vault.default.k8s_project.k8s_domain
     http:
       paths:
