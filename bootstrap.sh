@@ -122,12 +122,7 @@ if [[ "${EVENT}" == "up" ]]; then
     vagrant ssh kube-master -- -t "sudo bash /vagrant/scripts/local/master_01.sh"
   fi
 elif [[ "${EVENT}" == "save" || "${EVENT}" == "restore" || "${EVENT}" == "delete" || "${EVENT}" == "list" ]]; then
-  if [[ "${EVENT}" == "list" ]]; then
-    echo vagrant snapshot list
-    vagrant snapshot list
-    exit 0
-  fi
-  if [[ "${EVENT}" == "list" ]]; then
+  if [[ "${EVENT}" == "save" ]]; then
     item=$(date +"%Y%m%d-%H%M%S")
     echo vagrant snapshot ${EVENT} ${item}
     vagrant snapshot ${EVENT} ${item}
@@ -136,6 +131,7 @@ elif [[ "${EVENT}" == "save" || "${EVENT}" == "restore" || "${EVENT}" == "delete
     vagrant snapshot ${EVENT} ${2}
   fi
   if [[ "${EVENT}" != "delete" ]]; then
+    echo vagrant snapshot list
     vagrant snapshot list
   fi
   exit 0
