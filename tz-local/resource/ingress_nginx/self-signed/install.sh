@@ -24,7 +24,7 @@ alias k="kubectl -n ${NS} --kubeconfig ~/.kube/config"
 kubectl delete -f self-signed.yaml
 kubectl apply -f self-signed.yaml
 
-#PROJECTS=(argocd/argocd jenkins/jenkins)
+#PROJECTS=(harbor/harbor)
 PROJECTS=(default/test consul/consul vault/vault monitoring/grafana monitoring/alertmanager monitoring/prometheus argocd/argocd jenkins/jenkins)
 for item in "${PROJECTS[@]}"; do
   echo "====================="

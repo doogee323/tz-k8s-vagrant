@@ -17,3 +17,4 @@ spec:
   dnsNames:
     - ITEM.topzone.me
     - ITEM.default.topzone-k8s.topzone.me
+    - ITEM.NS.topzone-k8s.topzone.me
