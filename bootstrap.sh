@@ -21,6 +21,10 @@ cat <<EOF
       "run kubespray.sh and other scripts"
   - bash bootstrap.sh status
       "vagrant status"
+  - bash bootstrap.sh save
+      "vagrant save snapshot xxx"
+  - bash bootstrap.sh restore
+      "vagrant restore snapshot xxx"
   - bash bootstrap.sh ssh
       "vagrant ssh kube-master"
   - bash bootstrap.sh remove
@@ -81,6 +85,8 @@ cp -Rf Vagrantfile Vagrantfile.bak
 EVENT=`vagrant status | grep -E 'kube-master|kube-slave-1' | grep 'not created'`
 if [[ "${EVENT}" != "" ]]; then
   EVENT='up'
+elif [[ "${EVENT}" == "save" || "${EVENT}" == "restore" ]]; then
+  EVENT=${EVENT}
 else
   EVENT='reload'
 fi
@@ -113,6 +119,12 @@ if [[ "${EVENT}" == "up" ]]; then
     sleep 5
     vagrant ssh kube-master -- -t "sudo bash /vagrant/scripts/local/master_01.sh"
   fi
+elif [[ "${EVENT}" == "save" || "${EVENT}" == "restore" ]]; then
+  for item in "${PROJECTS[@]}"; do
+    vagrant ${EVENT} snapshot ${item}
+  done
+  vagrant snapshot list
+  exit 0
 else
   if [[ "${PROVISION}" == "y" ]]; then
     if [[ "${A_ENV}" == "M" ]]; then
