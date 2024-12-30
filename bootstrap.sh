@@ -82,7 +82,7 @@ else
 fi
 
 cp -Rf Vagrantfile Vagrantfile.bak
-if [[ "${1}" == "save" || "${1}" == "restore" || "${EVENT}" == "delete" || "${1}" == "list" ]]; then
+if [[ "${1}" == "save" || "${1}" == "restore" || "${1}" == "delete" || "${1}" == "list" ]]; then
   EVENT=${1}
 else
   EVENT=`vagrant status | grep -E 'kube-master|kube-slave-1' | grep 'not created'`
