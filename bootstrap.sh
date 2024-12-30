@@ -127,10 +127,9 @@ elif [[ "${EVENT}" == "save" || "${EVENT}" == "restore" || "${EVENT}" == "list" 
     vagrant snapshot list
     exit 0
   fi
-  for item in "${PROJECTS[@]}"; do
-    echo vagrant snapshot ${EVENT} ${item}
-    vagrant snapshot ${EVENT} ${item}
-  done
+  item=$(date +"%Y%m%d%H%M%S")
+  echo vagrant snapshot ${EVENT} ${item}
+  vagrant snapshot ${EVENT} ${item}
   vagrant snapshot list
   exit 0
 else
