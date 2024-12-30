@@ -1,7 +1,7 @@
 apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
-  name: self-signed-cert-ITEM
+  name: ingress-ITEM-tls
 spec:
   secretName: ingress-ITEM-tls
   duration: 8760h

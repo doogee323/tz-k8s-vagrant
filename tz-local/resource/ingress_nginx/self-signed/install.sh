@@ -24,8 +24,8 @@ alias k="kubectl -n ${NS} --kubeconfig ~/.kube/config"
 kubectl delete -f self-signed.yaml
 kubectl apply -f self-signed.yaml
 
-#PROJECTS=(default/test)
-PROJECTS=(default/test harbor/harbor monitoring/alertmanager monitoring/grafana monitoring/prometheus argocd/argocd consul/consul vault/vault jenkins/jenkins)
+#PROJECTS=(argocd/argocd jenkins/jenkins)
+PROJECTS=(default/test consul/consul vault/vault monitoring/grafana monitoring/alertmanager monitoring/prometheus argocd/argocd jenkins/jenkins)
 for item in "${PROJECTS[@]}"; do
   echo "====================="
   IFS='/' read NS ITEM <<< "$item"
@@ -38,7 +38,7 @@ for item in "${PROJECTS[@]}"; do
   k delete -f certificate.yaml_bak -n ${NS}
   k apply -f certificate.yaml_bak -n ${NS}
   sleep 2
-  kubectl get secret ingress-${ITEM}-tls -n ${NS} -o jsonpath='{.data.ca\.crt}' | base64 --decode > self-signed-${ITEM}.crt
+  kubectl get secret ingress-${ITEM}-tls -n ${NS} -o jsonpath='{.data.ca\.crt}' | base64 --decode > ingress-${ITEM}-tls.crt
 done
 
 # 로컬 환경 테스트
