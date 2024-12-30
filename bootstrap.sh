@@ -127,9 +127,14 @@ elif [[ "${EVENT}" == "save" || "${EVENT}" == "restore" || "${EVENT}" == "delete
     vagrant snapshot list
     exit 0
   fi
-  item=$(date +"%Y%m%d-%H%M%S")
-  echo vagrant snapshot ${EVENT} ${item}
-  vagrant snapshot ${EVENT} ${item}
+  if [[ "${EVENT}" == "list" ]]; then
+    item=$(date +"%Y%m%d-%H%M%S")
+    echo vagrant snapshot ${EVENT} ${item}
+    vagrant snapshot ${EVENT} ${item}
+  elif [[ "${EVENT}" == "restore" || "${EVENT}" == "delete" ]]; then
+    echo vagrant snapshot ${EVENT} ${2}
+    vagrant snapshot ${EVENT} ${2}
+  fi
   vagrant snapshot list
   exit 0
 else
