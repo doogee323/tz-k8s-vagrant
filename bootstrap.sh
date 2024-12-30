@@ -123,6 +123,7 @@ if [[ "${EVENT}" == "up" ]]; then
   fi
 elif [[ "${EVENT}" == "save" || "${EVENT}" == "restore" ]]; then
   for item in "${PROJECTS[@]}"; do
+    echo vagrant ${EVENT} snapshot ${item}
     vagrant ${EVENT} snapshot ${item}
   done
   vagrant snapshot list
