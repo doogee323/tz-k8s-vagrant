@@ -135,7 +135,9 @@ elif [[ "${EVENT}" == "save" || "${EVENT}" == "restore" || "${EVENT}" == "delete
     echo vagrant snapshot ${EVENT} ${2}
     vagrant snapshot ${EVENT} ${2}
   fi
-  vagrant snapshot list
+  if [[ "${EVENT}" != "delete" ]]; then
+    vagrant snapshot list
+  fi
   exit 0
 else
   if [[ "${PROVISION}" == "y" ]]; then
