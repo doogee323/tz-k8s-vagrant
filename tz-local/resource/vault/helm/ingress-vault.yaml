@@ -9,10 +9,11 @@ metadata:
     cert-manager.io/cluster-issuer: "selfsigned-issuer"
 spec:
   rules:
-  - host: vault.k8s_domain`
+  - host: vault.k8s_domain
     http:
       paths:
       - path: /
+        pathType: Prefix
         backend:
           service:
             name: vault
