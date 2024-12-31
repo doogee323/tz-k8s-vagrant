@@ -102,7 +102,7 @@ else
     EVENT='reload'
   fi
 fi
-echo "EVENT: ${EVENT}, PROVISION: ${PROVISION}"
+echo "EVENT: ${EVENT}, Type: ${A_ENV}, PROVISION: ${PROVISION}"
 
 if [[ "${A_ENV}" == "M" ]]; then
   cp -Rf ./scripts/local/Vagrantfile Vagrantfile
