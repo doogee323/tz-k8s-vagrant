@@ -52,6 +52,7 @@ elif [[ "$1" == "remove" ]]; then
   echo "vagrant destroy -f"
   vagrant destroy -f
   git checkout Vagrantfile
+  rm -Rf info
   exit 0
 elif [[ "$1" == "docker" ]]; then
   DOCKER_NAME=`docker ps | grep docker-${tz_project} | awk '{print $1}'`
@@ -68,8 +69,17 @@ elif [[ "$1" == "docker" ]]; then
 #  docker exec -it ${DOCKER_NAME} bash /vagrant/tz-local/docker/init2.sh
 fi
 
-echo -n "Do you want to make a jenkins on k8s in Vagrant Master / Slave? (M/S) "
-read A_ENV
+if [ ! -f info ]; then
+  echo -n "Do you want to make a jenkins on k8s in Vagrant Master / Slave? (M/S) "
+  read A_ENV
+else
+  A_ENV=`cat Vagrantfile | grep 'kube-master'`
+  if [[ "${A_ENV}" != "" ]]; then
+    A_ENV="M"
+  else
+    A_ENV="S"
+  fi
+fi
 
 MYKEY=tz_rsa
 if [ ! -f .ssh/${MYKEY} ]; then
@@ -94,7 +104,6 @@ else
 fi
 echo "EVENT: ${EVENT}, PROVISION: ${PROVISION}"
 
-echo "" > info
 if [[ "${A_ENV}" == "M" ]]; then
   cp -Rf ./scripts/local/Vagrantfile Vagrantfile
   PROJECTS=(kube-master kube-node-1 kube-node-2)
@@ -104,6 +113,7 @@ elif [[ "${A_ENV}" == "S" ]]; then
 fi
 
 if [[ "${EVENT}" == "up" ]]; then
+  echo "- PC Type: ${A_ENV}" > info
   echo "##################################################################################"
   echo 'vagrant ${EVENT} --provider=virtualbox'
   echo "##################################################################################"
