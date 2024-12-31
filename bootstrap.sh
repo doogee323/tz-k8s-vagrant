@@ -23,8 +23,10 @@ cat <<EOF
       "vagrant status"
   - bash bootstrap.sh save
       "vagrant save snapshot xxx"
-  - bash bootstrap.sh restore
+  - bash bootstrap.sh restore xxx
       "vagrant restore snapshot xxx"
+  - bash bootstrap.sh delete xxx
+      "vagrant restore delete xxx"
   - bash bootstrap.sh ssh
       "vagrant ssh kube-master"
   - bash bootstrap.sh remove
