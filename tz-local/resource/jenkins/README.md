@@ -52,8 +52,9 @@
     
     - gmail-smtp
       1. https://jenkins.default.topzone-k8s.topzone.me/credentials/store/system/domain/_/newCredentials
-        Kind: Secret text
-        Secret: ex) xxxxxxxxxxxxxxxxxxxxxxxxx
+        Kind: Username with password
+        Username: ex) doogee323@gmail.com
+        Password: ex) xxxxxxxxxxxxxxxx
         ID: gmail-smtp
         Description: gmail-smtp
 
