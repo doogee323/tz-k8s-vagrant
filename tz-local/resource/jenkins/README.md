@@ -68,7 +68,7 @@
         SMTP Server: smtp.gmail.com
         Use SMTP Authentication
             User Name: doogee323@gmail.com
-            Password: xxxxx  => Google "App password"
+            Password: xxxxx  => Google "App password"  // https://myaccount.google.com/apppasswords
         Use SSL: no
         Use TLS: yes
         SMTP Port: 587
